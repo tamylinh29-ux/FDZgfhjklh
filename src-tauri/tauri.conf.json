@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "AllOS Emulator",
+  "version": "0.1.0",
+  "identifier": "com.allos.emulator",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "AllOS Emulator",
+        "width": 1180,
+        "height": 780,
+        "minWidth": 860,
+        "minHeight": 600,
+        "center": true,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "msi", "dmg", "appimage", "deb"],
+    "category": "Utility",
+    "shortDescription": "Multi-architecture QEMU virtual machine manager",
+    "longDescription": "A lightweight desktop interface for managing QEMU virtual machines. QEMU binaries and guest operating system images are provided separately."
+  }
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eef2f8">
+  <title>AllOS Emulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="AllOS Emulator home">
+      <span class="brand-mark">A</span><span><b>AllOS</b><small>EMULATOR STUDIO</small></span>
+    </a>
+    <div class="island" id="dynamicIsland">
+      <button class="island-main" id="islandToggle" aria-expanded="false">
+        <span class="pulse-dot" id="globalDot"></span><span id="islandLabel">No VM running</span>
+        <span class="chevron">⌄</span>
+      </button>
+      <div class="island-expanded" id="islandExpanded">
+        <div class="metric"><span>CPU</span><b id="cpuMetric">—</b></div>
+        <div class="metric"><span>MEMORY</span><b id="ramMetric">—</b></div>
+        <div class="island-actions">
+          <button class="mini" data-action="start" title="Start">▶</button>
+          <button class="mini" data-action="pause" title="Pause">Ⅱ</button>
+          <button class="mini" data-action="restart" title="Restart">↻</button>
+          <button class="mini" data-action="stop" title="Stop">■</button>
+        </div>
+      </div>
+    </div>
+    <button class="icon-button" id="themeToggle" title="Toggle appearance">◐</button>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div><p class="eyebrow">VIRTUALIZATION WORKSPACE</p><h1>Your systems.<br><span>One universe.</span></h1>
+        <p class="hero-copy">Create, launch and manage QEMU virtual machines from one calm, focused workspace.</p>
+      </div>
+      <div class="hero-orb"><div class="orb-core">OS</div><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span></div>
+    </section>
+
+    <section class="section-head">
+      <div><p class="eyebrow">WORKSPACE</p><h2>Virtual machines</h2></div>
+      <button class="primary-button" id="newVmButton"><span>＋</span> New virtual machine</button>
+    </section>
+
+    <section class="vm-grid" id="vmGrid">
+      <article class="empty-card" id="emptyCard">
+        <div class="empty-icon">▧</div><h3>Start with a virtual machine</h3>
+        <p>Add a guest image and connect your local QEMU installation to get started.</p>
+        <button class="secondary-button" id="emptyCreate">Create your first VM</button>
+      </article>
+    </section>
+
+    <section class="lower-grid">
+      <article class="glass-panel log-panel">
+        <div class="panel-heading"><div><p class="eyebrow">LIVE OUTPUT</p><h3>QEMU console</h3></div><span class="live-tag"><i></i> LIVE</span></div>
+        <div class="log-output" id="logOutput"><p class="muted">Logs will appear here when a VM starts.</p></div>
+      </article>
+      <article class="glass-panel debugger-panel">
+        <div class="panel-heading"><div><p class="eyebrow">ASSISTANCE</p><h3>Auto-Debugger</h3></div><span class="sparkle">✳</span></div>
+        <div id="debuggerContent" class="debugger-content"><div class="debugger-ok">✓</div><b>All systems quiet</b><p>Detected QEMU issues and suggested fixes will appear here.</p></div>
+      </article>
+    </section>
+    <footer><span>ALLOS EMULATOR · DESKTOP</span><span>QEMU-powered · Local-first</span></footer>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <section class="modal glass-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-heading"><div><p class="eyebrow">CONFIGURATION</p><h2 id="modalTitle">New virtual machine</h2></div><button class="icon-button" id="closeModal" aria-label="Close">×</button></div>
+      <form id="vmForm">
+        <div class="field-row"><label>VM name<input id="vmName" required value="My Virtual Machine"></label><label>Architecture<select id="architecture"><option value="x86_64">x86_64</option><option value="aarch64">ARM64 · aarch64</option><option value="riscv64">RISC-V 64</option></select></label></div>
+        <label>QEMU executable path<input id="qemuPath" required placeholder="/usr/bin/qemu-system-x86_64 or C:\Program Files\qemu\qemu-system-x86_64.exe"></label>
+        <label>Guest image path<input id="diskPath" required placeholder="Select or enter .iso, .img, .qcow2, .vmdk, .vdi path"></label>
+        <div class="field-row"><label>Memory (MB)<input id="memoryMb" type="number" min="256" max="1048576" value="4096"></label><label>CPU cores<input id="cpuCount" type="number" min="1" max="256" value="4"></label></div>
+        <div class="field-row"><label>Firmware<select id="firmware"><option value="bios">BIOS</option><option value="uefi">UEFI (firmware must be installed)</option></select></label><label>Graphics<select id="graphics"><option value="virtio">VirtIO VGA</option><option value="std">Standard VGA</option><option value="none">Headless</option></select></label></div>
+        <div class="field-row"><label>Network<select id="network"><option value="user">User-mode NAT</option><option value="e1000">E1000</option><option value="none">Disabled</option></select></label><label>Extra QEMU arguments<input id="extraArgs" placeholder="-display sdl (optional)"></label></div>
+        <div class="form-note" id="presetNote">Choose an image path to receive an automatic starting preset.</div>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancel</button><button type="submit" class="primary-button">Save VM</button></div>
+      </form>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
